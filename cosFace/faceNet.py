@@ -149,24 +149,6 @@ class faceNet(nn.Module):
         
         # IMPLEMENT forward of network
 
-#         Baseline
-#         x = self.relu1_1(self.conv1_1(x))
-#         x = x + self.relu1_3(self.conv1_3(self.relu1_2(self.conv1_2(x))))
-
-#         x = self.relu2_1(self.conv2_1(x))
-#         x = x + self.relu2_3(self.conv2_3(self.relu2_2(self.conv2_2(x))))
-#         x = x + self.relu2_5(self.conv2_5(self.relu2_4(self.conv2_4(x))))
-
-#         x = self.relu3_1(self.bn3_1(self.conv3_1(x)))
-#         x = x + self.relu3_3(self.conv3_3(self.relu3_2(self.conv3_2(x))))
-#         x = x + self.relu3_5(self.conv3_5(self.relu3_4(self.conv3_4(x))))
-#         x = x + self.relu3_7(self.conv3_7(self.relu3_6(self.conv3_6(x))))
-#         x = x + self.relu3_9(self.conv3_9(self.relu3_8(self.conv3_8(x))))
-
-#         x = self.relu4_1(self.conv4_1(x))
-#         x = x + self.relu4_3(self.conv4_3(self.relu4_2(self.conv4_2(x))))
-
-#         Batch Norm
         x = self.relu1_1(self.bn1_1(self.conv1_1(x)))
         x = x + self.relu1_3(self.bn1_3(self.conv1_3(self.relu1_2(self.bn1_2(self.conv1_2(x))))))
         
@@ -183,22 +165,6 @@ class faceNet(nn.Module):
         x = self.relu4_1(self.bn4_1(self.conv4_1(x)))
         x = x + self.relu4_3(self.bn4_3(self.conv4_3(self.relu4_2(self.bn4_2(self.conv4_2(x))))))
 
-#         Dropout
-#         x = self.relu1_1(self.conv1_1(x))
-#         x = x + self.relu1_3(self.conv1_3(self.relu1_2(self.conv1_2(x))))
-
-#         x = self.relu2_1(self.conv2_1(x))
-#         x = x + self.relu2_3(self.conv2_3(self.relu2_2(self.conv2_2(x))))
-#         x = x + self.relu2_5(self.conv2_5(self.relu2_4(self.conv2_4(x))))
-
-#         x = self.relu3_1(self.bn3_1(self.conv3_1(x)))
-#         x = x + self.relu3_3(self.conv3_3(self.relu3_2(self.conv3_2(x))))
-#         x = x + self.relu3_5(self.conv3_5(self.relu3_4(self.conv3_4(x))))
-#         x = x + self.relu3_7(self.conv3_7(self.relu3_6(self.conv3_6(x))))
-#         x = x + self.relu3_9(self.conv3_9(self.relu3_8(self.conv3_8(x))))
-
-#         x = self.relu4_1(self.conv4_1(x))
-#         x = x + self.relu4_3(self.conv4_3(self.relu4_2(self.conv4_2(x))))
 
         x = x.view(x.size(0),-1)
         x = self.dropout(x)
@@ -207,9 +173,5 @@ class faceNet(nn.Module):
         if self.feature:
             return x
 
-#         x = self.fc6(x)
         x = self.fc6(self.bn_fc5(x))
-#         x = self.bn_fc5(x)
-#         x = self.dropout(x)
-#         x = self.fc6(x)
         return x
